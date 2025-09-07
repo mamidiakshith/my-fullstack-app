@@ -15,19 +15,25 @@ const io = socketIO(server, {
   cors: {
     origin: [
       "http://localhost:5173",
-      "https://my-fullstack-app-cbzn-git-main-akshiths-projects-0e94275f.vercel.app"
+      "https://my-fullstack-app-lhlf-git-main-akshiths-projects-0e94275f.vercel.app"
     ],
-    methods: ["GET", "POST"],
+    methods: ["GET","POST"],
     credentials: true
   }
 });
 
 
+
 // Middleware
 app.use(cors({
-  origin: ["http://localhost:5173","https://my-fullstack-app-cbzn-git-main-akshiths-projects-0e94275f.vercel.app"],
+  origin: [
+    "http://localhost:5173",
+    "https://my-fullstack-app-lhlf-git-main-akshiths-projects-0e94275f.vercel.app"
+  ],
   credentials: true
 }));
+
+
 app.use(express.json());
 
 // Routes
