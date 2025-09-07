@@ -20,7 +20,12 @@ const io = socketIO(server, {
 });
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+const cors = require("cors");
+
+app.use(cors({
+  origin: ["http://localhost:5173","https://my-fullstack-app-cbzn-git-main-akshiths-projects-0e94275f.vercel.app"],
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
