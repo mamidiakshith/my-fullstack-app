@@ -13,15 +13,17 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, {
   cors: {
-    origin: "http://localhost:5173", // frontend origin (Vite default)
+    origin: [
+      "http://localhost:5173",
+      "https://my-fullstack-app-cbzn-git-main-akshiths-projects-0e94275f.vercel.app"
+    ],
     methods: ["GET", "POST"],
     credentials: true
   }
 });
 
-// Middleware
-const cors = require("cors");
 
+// Middleware
 app.use(cors({
   origin: ["http://localhost:5173","https://my-fullstack-app-cbzn-git-main-akshiths-projects-0e94275f.vercel.app"],
   credentials: true
