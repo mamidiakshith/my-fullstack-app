@@ -1,0 +1,31 @@
+### Register User
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+  "username": "Akshith",
+  "email": "akshithmamidi@gmail.com",
+  "password": "mama123"
+}
+
+### Login User
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+  "email": "akshithreddymamidi@gmail.com",
+  "password": "mama123"
+}
+
+### Get All Users (requires JWT token)
+GET http://localhost:5000/auth/users
+Authorization: Bearer {"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjA4OTY4Yzk4NTdhNjA3ZmE1ZjVjYyIsImVtYWlsIjoiYWtzaGl0aHJlZGR5bWFtaWRpQGdtYWlsLmNvbSIsImlhdCI6MTc1NjQwMDQwMiwiZXhwIjoxNzU2NDA0MDAyfQ.cn9_vz7swf6iSHQJic_bW0W6yasOPvaedycMBWiVVT8"}}
+
+### Delete User by Username (requires JWT token)
+DELETE http://localhost:5000/auth/users/Maxx12
+Authorization: Bearer {"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjA4OTY4Yzk4NTdhNjA3ZmE1ZjVjYyIsImVtYWlsIjoiYWtzaGl0aHJlZGR5bWFtaWRpQGdtYWlsLmNvbSIsImlhdCI6MTc1NjQwMDQwMiwiZXhwIjoxNzU2NDA0MDAyfQ.cn9_vz7swf6iSHQJic_bW0W6yasOPvaedycMBWiVVT8"}
+
+### Get Conversation Messages between logged in user and userId (requires JWT token)
+GET http://localhost:5000/auth/conversations/{"68bac43fc3f26b6fd317c327"}/messages
+Authorization: Bearer {"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmFjNDNmYzNmMjZiNmZkMzE3YzMyNyIsImVtYWlsIjoiYWtzaGl0aHJlZGR5bWFtaWRpQGdtYWlsLmNvbSIsImlhdCI6MTc1NzA3MDQxMiwiZXhwIjoxNzU3MDc0MDEyfQ.NPynHmTXSMeI3Gsz_AoF30APY_w80T8fVfp20cxVMII"}
+

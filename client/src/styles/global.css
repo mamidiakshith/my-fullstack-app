@@ -1,0 +1,19 @@
+/* Global app container */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f3f4f6; /* light gray */
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Authentication box wrapper */
+.auth-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  width: 360px;
+  box-shadow: 0px 4px 16px rgba(0,0,0,0.1);
+}
