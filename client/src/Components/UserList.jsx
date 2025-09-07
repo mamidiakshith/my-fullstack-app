@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../styles/UserList.css";
 
+// ✅ Use environment variable for backend URL
+const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 function UserList({ users, activeUser, onSelectUser, currentUser }) {
   const [unreadCounts, setUnreadCounts] = useState({});
 
@@ -11,12 +14,9 @@ function UserList({ users, activeUser, onSelectUser, currentUser }) {
 
     const fetchUnread = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:5000/auth/messages/unread/${currentUser._id}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const res = await fetch(`${BASE_URL}/auth/messages/unread/${currentUser._id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         const data = await res.json();
 
         // Convert [{_id, count}] into { senderId: count }
@@ -41,7 +41,7 @@ function UserList({ users, activeUser, onSelectUser, currentUser }) {
 
     const token = localStorage.getItem("token");
     try {
-      await fetch(`http://localhost:5000/auth/messages/read/${user._id}`, {
+      await fetch(`${BASE_URL}/auth/messages/read/${user._id}`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
       });

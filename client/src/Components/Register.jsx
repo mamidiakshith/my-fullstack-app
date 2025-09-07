@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ for redirect
-import "../styles/Login.css"; // Reuse same form styles
+import { useNavigate } from "react-router-dom";
+import "../styles/Login.css";
+
+// ✅ Use environment variable for backend URL
+const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 function Register({ onRegisterSuccess, onSwitch }) {
   const [username, setUsername] = useState("");
@@ -8,14 +11,14 @@ function Register({ onRegisterSuccess, onSwitch }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // ✅ hook for navigation
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/auth/register", {
+      const res = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
@@ -28,14 +31,14 @@ function Register({ onRegisterSuccess, onSwitch }) {
         return;
       }
 
-      // ✅ Save JWT token
+      // Save JWT token
       localStorage.setItem("token", data.token);
 
-      // ✅ Save user to app state
+      // Notify parent App.jsx about new user
       onRegisterSuccess(data.user);
 
-      // ✅ Redirect to home/dashboard
-      navigate("/home"); 
+      // Redirect to home/dashboard
+      navigate("/home");
     } catch (err) {
       console.error("Register error:", err);
       setError("Something unexpected happened");

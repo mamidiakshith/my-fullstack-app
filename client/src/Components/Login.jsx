@@ -1,42 +1,43 @@
 import { useState } from "react";
 import "../styles/Login.css";
 
+// ✅ Use environment variable for backend URL
+const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 function Login({ onLoginSuccess, onSwitch }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
-  e.preventDefault();
-  setError("");
+    e.preventDefault();
+    setError("");
 
-  try {
-    const res = await fetch("http://localhost:5000/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
-      // backend always returns { error: "..." } for failures
-      setError(data.error || "Login failed");
-      return;
+      if (!res.ok) {
+        setError(data.error || "Login failed");
+        return;
+      }
+
+      // Save JWT token in localStorage
+      localStorage.setItem("token", data.token);
+
+      // Notify parent App.jsx about successful login
+      onLoginSuccess(data.user);
+
+    } catch (err) {
+      console.error("Login request failed:", err);
+      setError("Network error, please try again");
     }
-
-    // Save JWT token in localStorage
-    localStorage.setItem("token", data.token);
-
-    // Notify parent App.jsx about successful login
-    onLoginSuccess(data.user);
-
-  } catch (err) {
-    console.error("Login request failed:", err);
-    setError("Network error, please try again");
-  }
-};
-
+  };
 
   return (
     <div className="login-container">
