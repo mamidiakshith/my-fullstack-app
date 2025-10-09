@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/Login.css";
 
 // ✅ Use environment variable for backend URL
-const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 function Login({ onLoginSuccess, onSwitch }) {
   const [email, setEmail] = useState("");

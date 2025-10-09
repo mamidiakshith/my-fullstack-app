@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/UserList.css";
 
 // ✅ Use environment variable for backend URL
-const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 function UserList({ users, activeUser, onSelectUser, currentUser }) {
   const [unreadCounts, setUnreadCounts] = useState({});
